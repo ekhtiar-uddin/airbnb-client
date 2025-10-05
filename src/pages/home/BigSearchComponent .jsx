@@ -184,13 +184,13 @@ const BigSearchComponent = ({
             <div className="flex items-center">
               <p
                 className={
-                  filters.checkOut
+                  filters.checkIn
                     ? "text-gray-900 text-sm font-bold"
                     : "text-sm text-muted-foreground"
                 }
               >
-                {filters.checkOut
-                  ? new Date(filters.checkOut).toLocaleDateString("en-US", {
+                {filters.checkIn
+                  ? new Date(filters.checkIn).toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
                     })

@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api/v1",
+  baseUrl: "https://airbnb-server-two.vercel.app/api/v1",
   credentials: "include", // this is to get cookies from backend,
   prepareHeaders: (headers) => {
     return headers;
