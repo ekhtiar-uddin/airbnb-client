@@ -83,7 +83,7 @@ const Map = ({ properties }) => {
   if (!properties) return <div>Failed to fetch properties</div>;
 
   return (
-    <div className="mt-5 border-2 border-white w-[767px] xl:h-[752px] 2xs:h-[75vh]  relative rounded-xl">
+    <div className="mt-5 border-2 border-white w-full h-[60vh] sm:h-[65vh] lg:h-[calc(100vh-140px)] relative rounded-xl">
       <div
         className="map-container rounded-xl"
         ref={mapContainerRef}
@@ -119,8 +119,8 @@ const createPropertyMarker = (property, map) => {
             </p>
           </div>
         </div>
-        `
-      )
+        `,
+      ),
     )
     .addTo(map);
   return marker;

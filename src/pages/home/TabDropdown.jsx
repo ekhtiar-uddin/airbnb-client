@@ -1,7 +1,7 @@
 import { Calendar } from "@/components/ui/calendar";
 import { useAppDispatch, useAppSelector } from "@/Redux/hooks";
 import { selectFilters, setFilters } from "@/Redux/Slices/globalSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { suggestedDestinations } from "./utils/global";
 
 const TabDropdown = ({
@@ -16,10 +16,19 @@ const TabDropdown = ({
   const dispatch = useAppDispatch();
   const filters = useAppSelector(selectFilters);
 
+  const normalizeDate = (value) => (value ? new Date(value) : undefined);
+
   const [dateRange, setDateRange] = useState({
-    from: filters.checkIn || undefined,
-    to: filters.checkOut || undefined,
+    from: normalizeDate(filters.checkIn),
+    to: normalizeDate(filters.checkOut),
   });
+
+  useEffect(() => {
+    setDateRange({
+      from: normalizeDate(filters.checkIn),
+      to: normalizeDate(filters.checkOut),
+    });
+  }, [filters.checkIn, filters.checkOut]);
 
   const [guestCounts, setGuestCounts] = useState(filters.guests);
 
@@ -34,7 +43,7 @@ const TabDropdown = ({
         setFilters({
           checkIn: range.from,
           checkOut: isSingleDate ? null : range.to || null,
-        })
+        }),
       );
 
       if (!range.to || isSingleDate) {
@@ -285,7 +294,7 @@ const TabDropdown = ({
               {Object.values(guestCounts).reduce((a, b) => a + b, 0) > 0
                 ? `${Object.values(guestCounts).reduce(
                     (a, b) => a + b,
-                    0
+                    0,
                   )} guest${
                     Object.values(guestCounts).reduce((a, b) => a + b, 0) > 1
                       ? "s"

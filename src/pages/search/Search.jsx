@@ -27,16 +27,19 @@ const Search = () => {
 
   const params = [{ name: "location", value: city }];
 
+  const toLocalDateString = (value) => {
+    if (!value) return null;
+    const date = new Date(value);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const checkIn =
-    searchParams.get("checkIn") ||
-    (filters.checkIn
-      ? new Date(filters.checkIn).toISOString().split("T")[0]
-      : null);
+    searchParams.get("checkIn") || toLocalDateString(filters.checkIn);
   const checkOut =
-    searchParams.get("checkOut") ||
-    (filters.checkOut
-      ? new Date(filters.checkOut).toISOString().split("T")[0]
-      : null);
+    searchParams.get("checkOut") || toLocalDateString(filters.checkOut);
   const guestCount =
     searchParams.get("guestCount") || filters.guestCount || null;
 
@@ -77,12 +80,12 @@ const Search = () => {
   const { data: properties, isLoading } = useGetAllPropertiesQuery(params);
   const [isMenuToggled, setIsMenuToggled] = useState(true);
   return (
-    <section className=" min-h-screen bg-gray-50">
+    <section className="min-h-screen bg-gray-50">
       {/* Fixed Navbar */}
-      <div className="sticky top-0 left-0 w-full  bg-gray-50 border-b transition-all duration-300 px-12 z-100">
-        <div className="pt-7">
-          <div className="flex items-start justify-between gap-4">
-            {/* Logo */}
+      <div className="sticky top-0 left-0 w-full bg-gray-50 border-b transition-all duration-300 z-100">
+        <div className="customWidth pt-3 sm:pt-7">
+          {/* Desktop navbar */}
+          <div className="hidden lg:flex items-center justify-between gap-4">
             <Link to={`/`}>
               <div className="pb-5 h-[56px] w-[102px] flex items-center flex-shrink-0">
                 <img src={logo} alt="logo" />
@@ -100,20 +103,38 @@ const Search = () => {
                 handleTabClick={handleTabClick}
               />
             </div>
-            {/* Right */}
             <div className="flex-shrink-0">
               <BecomeHost />
+            </div>
+          </div>
+
+          {/* Mobile/tablet navbar */}
+          <div className="lg:hidden flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <Link to={`/`}>
+                <div className="pb-2 h-[48px] w-[96px] flex items-center flex-shrink-0">
+                  <img src={logo} alt="logo" />
+                </div>
+              </Link>
+              <div>
+                <BecomeHost />
+              </div>
+            </div>
+            <div className="searchShadow flex w-full items-center gap-2 rounded-full border border-[#dddddd] bg-white px-4 py-3 text-left">
+              <span className="text-sm font-medium text-[#222222] truncate">
+                Start your search
+              </span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content - No separate scroll container */}
-      <div className="px-12">
-        <div className="flex gap-6">
+      <div className="customWidth">
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Left Side - Property Cards (Scrollable with page) */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center justify-between my-8">
+            <div className="flex flex-col 2xs:flex-row 2xs:items-center 2xs:justify-between gap-2 my-6 sm:my-8">
               <h3 className="text-sm font-bold">Over 1,000 homes</h3>
               <p className="text-sm font-bold text-gray-900">
                 Prices include all fees
@@ -121,13 +142,13 @@ const Search = () => {
             </div>
 
             {isLoading ? (
-              <div className="grid grid-cols-3 gap-[11px] pb-12">
+              <div className="grid grid-cols-1 2xs:grid-cols-2 lg:grid-cols-3 gap-[11px] pb-12">
                 {Array.from({ length: 9 }).map((item, index) => (
                   <PropertyCardSkeleton key={index} />
                 ))}
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-[11px] pb-12">
+              <div className="grid grid-cols-1 2xs:grid-cols-2 lg:grid-cols-3 gap-[11px] pb-12">
                 {properties?.data?.map((property) => (
                   <PropertyCard key={property?._id} property={property} />
                 ))}
@@ -136,7 +157,7 @@ const Search = () => {
           </div>
 
           {/* Right Side - Sticky Map */}
-          <div className="w-[767px] flex-shrink-0">
+          <div className="hidden lg:block w-[767px] flex-shrink-0">
             <div className="sticky top-[120px] h-[calc(100vh-140px)]">
               <Map properties={properties?.data} />
             </div>

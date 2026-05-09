@@ -50,16 +50,20 @@ const BigSearchComponent = ({
   }, [forceWhereDropdown, openTab, onCloseForceWhereDropdown]);
 
   const handleSearch = () => {
+    const toLocalDateString = (value) => {
+      if (!value) return "";
+      const date = new Date(value);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
     // Use a default location if none is provided
     const location = filters.location || "Paris, France";
     const formatted = location.replace(", ", "--");
 
-    const checkIn = filters.checkIn
-      ? new Date(filters.checkIn).toISOString().split("T")[0]
-      : "";
-    const checkOut = filters.checkOut
-      ? new Date(filters.checkOut).toISOString().split("T")[0]
-      : "";
+    const checkIn = toLocalDateString(filters.checkIn);
+    const checkOut = toLocalDateString(filters.checkOut);
     const guestCount = filters.guestCount || 0;
 
     const params = new URLSearchParams();

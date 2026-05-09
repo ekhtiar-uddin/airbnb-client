@@ -49,7 +49,7 @@ const Home = () => {
     <section className="bg-[#fcfcfc]">
       <div className="customWidth">
         {/* --- SINGLE FIXED NAVBAR --- */}
-        <div className="fixed bg-gray-50 pt-3 sm:pt-7 left-0 w-full z-40 bg-whited md:border-b  transition-all duration-300">
+        <div className="fixed bg-gray-50 pt-3 sm:pt-7 left-0 w-full z-40 bg-whited md:border-b border-none  transition-all duration-300">
           <div className="customWidth">
             {/* Desktop navbar */}
             <div className="hidden lg:flex items-start justify-between gap-4">
