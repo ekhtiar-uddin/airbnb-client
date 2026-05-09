@@ -1,6 +1,6 @@
 export const WhereYouWillSleep = ({ sleepingArrangementsData }) => {
   return (
-    <div className="max-w-[653px] px-6 py-12">
+    <div className="w-full max-w-none px-4 sm:px-6 py-12">
       {/* Title */}
       <h2 className="text-2xl font-semibold text-gray-900 mb-6">
         Where you'll sleep

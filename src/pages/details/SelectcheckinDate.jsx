@@ -8,6 +8,7 @@ const SelectcheckinDate = () => {
   // States
   const [showCalendar, setShowCalendar] = useState(false);
   const [showGuestPicker, setShowGuestPicker] = useState(false);
+  const [monthsToShow, setMonthsToShow] = useState(2);
 
   // Use undefined for calendar compatibility
   const [dateRange, setDateRange] = React.useState({
@@ -38,7 +39,7 @@ const SelectcheckinDate = () => {
       (unavailable) =>
         date.getFullYear() === unavailable.getFullYear() &&
         date.getMonth() === unavailable.getMonth() &&
-        date.getDate() === unavailable.getDate()
+        date.getDate() === unavailable.getDate(),
     );
   };
 
@@ -57,6 +58,15 @@ const SelectcheckinDate = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const updateMonths = () => {
+      setMonthsToShow(window.innerWidth < 640 ? 1 : 2);
+    };
+    updateMonths();
+    window.addEventListener("resize", updateMonths);
+    return () => window.removeEventListener("resize", updateMonths);
   }, []);
 
   // Calculate nights
@@ -203,11 +213,13 @@ const SelectcheckinDate = () => {
     <div ref={calendarRef} className="w-full bg-transparent px-0 pt-0">
       {/* Title and selected dates */}
       <div className="mb-2">
-        <div className="font-bold text-2xl mb-0">2 nights in Paris</div>
+        <div className="font-bold text-xl sm:text-2xl mb-0">
+          2 nights in Paris
+        </div>
         <div className="text-sm text-gray-500 mt-1">
           {dateRange?.from && dateRange?.to
             ? `${formatDateInput(dateRange.from)} - ${formatDateInput(
-                dateRange.to
+                dateRange.to,
               )}`
             : ""}
         </div>
@@ -221,8 +233,8 @@ const SelectcheckinDate = () => {
           selected={dateRange}
           onSelect={setDateRange}
           disabled={getDisabledDates()}
-          numberOfMonths={2}
-          className=" bg-gray-50 [--cell-size:--spacing(11)] md:[--cell-size:--spacing(10)] "
+          numberOfMonths={monthsToShow}
+          className="w-full bg-gray-50 [--cell-size:--spacing(11)] md:[--cell-size:--spacing(10)]"
         />
       </div>
 

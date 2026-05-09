@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-white border-t text-gray-900 mt-12">
-      <div className=" py-10 px-10">
+      <div className=" py-10 ">
         <h2 className="text-2xl font-semibold mb-6">
           Inspiration for future getaways
         </h2>

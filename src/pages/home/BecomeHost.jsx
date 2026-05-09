@@ -8,7 +8,7 @@ const BecomeHost = () => {
     <div className="flex gap-3">
       <button
         onClick={() => setShowModal(true)}
-        className="hover:bg-hostBg py-[11px] px-[12px] rounded-full cursor-pointer text-sm font-semibold"
+        className="hover:bg-hostBg xl:block hidden py-[11px] px-[12px] rounded-full cursor-pointer text-sm font-semibold"
       >
         Become a host
       </button>

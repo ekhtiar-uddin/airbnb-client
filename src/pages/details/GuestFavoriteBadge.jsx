@@ -3,8 +3,8 @@ import favTwo from "/src/assets/favorite-2.png";
 
 const GuestFavoriteBadge = ({ data }) => {
   return (
-    <div className="mt-8 bg-white w-[653px] h-[89px] flex-center border border-gray-300 rounded-xl px-6 shadow-sm">
-      <div className="flex items-center justify-between gap-6">
+    <div className="mt-8 bg-white w-full max-w-[653px] border border-gray-300 rounded-xl px-4 sm:px-6 py-3 shadow-sm">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         {/* Left Section - Guest Favorite */}
         <div className="flex items-center gap-3">
           <img className="w-[23px]" src={favOne} alt="" />
@@ -41,7 +41,7 @@ const GuestFavoriteBadge = ({ data }) => {
             </div>
           </div>
 
-          <div className="h-8 w-px bg-gray-300"></div>
+          <div className="hidden sm:block h-8 w-px bg-gray-300"></div>
 
           <div className="text-center">
             <p className="text-[22px] font-semibold text-gray-900">

@@ -41,9 +41,9 @@ const PropertyDetails = () => {
 
   if (isLoading || isFetching || !propertyData?.data) {
     return (
-      <div className="h-[100vh] customDetailsWidth">
+      <div className="h-[100vh] customDetailsWidth overflow-x-hidden">
         <div className=" pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             {/* Logo */}
             <Link to={`/`}>
               <div
@@ -74,10 +74,10 @@ const PropertyDetails = () => {
   console.log(place?.reviewsData);
 
   return (
-    <div className=" bg-gray-50 z-0">
+    <div className="bg-gray-50 z-0 overflow-x-hidden">
       <div className="customDetailsWidth">
         <div className=" pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-4">
             {/* Logo */}
             <Link to={`/`}>
               <div
@@ -101,11 +101,13 @@ const PropertyDetails = () => {
           </div>
         </div>
 
-        <div className="mt-4  min-h-screen">
-          <h1 className="text-2xl font-bold mb-7">{place?.title}</h1>
+        <div className="mt-4 min-h-screen">
+          <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-7">
+            {place?.title}
+          </h1>
           {/* <AddressLink>{place.address}</AddressLink> */}
           <PlaceGallery place={place} />
-          <div className=" mt-[33px] mb-8 grid gap-[93px] grid-cols-1 md:grid-cols-[2fr_1fr]">
+          <div className="mt-[33px] mb-8 grid gap-8 lg:gap-[93px] grid-cols-1 md:grid-cols-[2fr_1fr]">
             <div>
               <div>
                 <h2 className="font-semibold text-2xl">{place?.subTitle}</h2>
@@ -140,8 +142,10 @@ const PropertyDetails = () => {
               <SelectcheckinDate />
             </div>
             <div
-              className={`transition-all  duration-300 max-w-max ${
-                isSticky ? "fixed top-10 -mr-2 z-50" : "relative ml-auto"
+              className={`transition-all duration-300 w-full md:max-w-[420px] mt-8 md:mt-0 ${
+                isSticky
+                  ? "lg:fixed lg:top-10 lg:-mr-2 lg:z-50"
+                  : "relative ml-0 md:ml-auto"
               }`}
               style={isSticky ? { right: `${rightOffset}px` } : {}}
             >
@@ -149,7 +153,7 @@ const PropertyDetails = () => {
               <BookingWidget place={place} />
             </div>
           </div>
-          <div className="bg-white px-8 py-8 border-t">
+          <div className="bg-white px-4 sm:px-8 py-8 border-t">
             <div>
               <h2 className="font-semibold text-2xl">Extra info</h2>
             </div>

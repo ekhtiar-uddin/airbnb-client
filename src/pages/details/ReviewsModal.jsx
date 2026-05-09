@@ -111,8 +111,8 @@ const ReviewsModal = ({ onClose, data }) => {
       onClick={onClose}
     >
       <div
-        className="relative bg-white rounded-3xl shadow-xl pt-8 px-10 pb-6 w-full max-w-5xl flex flex-row"
-        style={{ maxHeight: "calc(100vh - 60px)" }}
+        className="relative bg-white rounded-3xl shadow-xl pt-6 px-4 sm:px-8 md:px-10 pb-6 w-full max-w-5xl flex flex-col md:flex-row"
+        style={{ maxHeight: "calc(100vh - 40px)" }}
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -123,7 +123,7 @@ const ReviewsModal = ({ onClose, data }) => {
         </button>
 
         {/* LEFT: Ratings Summary */}
-        <div className="flex-1 pr-8">
+        <div className="flex-1 md:pr-8">
           <div className="flex flex-col items-center mb-6">
             <div className="flex items-center gap-4">
               <img src={favOne} alt="" className="w-10 h-10" />
@@ -178,7 +178,7 @@ const ReviewsModal = ({ onClose, data }) => {
 
         {/* RIGHT: Reviews (SCROLLABLE COLUMN) */}
         <div
-          className="flex-1 flex flex-col pl-8"
+          className="flex-1 flex flex-col md:pl-8 mt-6 md:mt-0"
           style={{
             maxHeight: "calc(100vh - 60px)",
             overflowY: "auto",
@@ -237,7 +237,7 @@ const ReviewsModal = ({ onClose, data }) => {
                 key={review.id}
                 className="border-b border-gray-200 pb-8 last:border-0"
               >
-                <div className="flex items-center gap-4 mb-2">
+                <div className="flex items-start sm:items-center gap-4 mb-2">
                   <img
                     src={review.userAvatar}
                     alt={review.userName}
@@ -259,7 +259,7 @@ const ReviewsModal = ({ onClose, data }) => {
                     )}
                   </div>
                 </div>
-                <div className="flex items-center gap-2 mb-2 ml-16">
+                <div className="flex items-center gap-2 mb-2 ml-0 sm:ml-16">
                   <div className="flex text-lg text-black leading-tight">
                     {[...Array(review.rating)].map((_, i) => (
                       <span key={i}>★</span>
@@ -267,12 +267,12 @@ const ReviewsModal = ({ onClose, data }) => {
                   </div>
                   <span className="text-sm text-gray-600">· {review.date}</span>
                 </div>
-                <p className="text-base text-gray-900 leading-relaxed ml-16">
+                <p className="text-base text-gray-900 leading-relaxed ml-0 sm:ml-16">
                   {review.comment}
                 </p>
                 {/* Add translation section if exists */}
                 {review.translation && (
-                  <div className="ml-16 text-xs text-gray-700 mt-2">
+                  <div className="ml-0 sm:ml-16 text-xs text-gray-700 mt-2">
                     {review.translation}{" "}
                     <span className="underline cursor-pointer">
                       Show original

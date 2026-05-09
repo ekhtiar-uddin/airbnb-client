@@ -12,7 +12,7 @@ const AirbnbListingCard = ({ host, badges, aboutSpace }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
+    <div className="w-full max-w-none mx-auto px-4 sm:px-6 py-6">
       {/* Host Section */}
       <div className="flex items-center gap-3 pb-6 border-b border-gray-200">
         <div className="relative">
@@ -90,7 +90,7 @@ const AirbnbListingCard = ({ host, badges, aboutSpace }) => {
 
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-1 text-gray-900 hover:text-gray-700 bg-navActionHoverBg hover:bg-[#ebebeb] transition-colors mt-5 w-[132px] h-[48px] font-bold rounded-xl flex-center cursor-pointer"
+          className="flex items-center gap-1 text-gray-900 hover:text-gray-700 bg-navActionHoverBg hover:bg-[#ebebeb] transition-colors mt-5 w-full sm:w-[132px] h-[48px] font-bold rounded-xl flex-center cursor-pointer"
         >
           Show More
         </button>

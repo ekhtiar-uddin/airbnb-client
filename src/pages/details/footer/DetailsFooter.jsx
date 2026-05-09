@@ -97,7 +97,7 @@ const DetailsFooter = () => (
             <div className="font-semibold mb-2 text-gray-900 text-[16px]">
               Explore other options in and around Mapo-gu
             </div>
-            <div className="grid grid-cols-3 gap-y-2 gap-x-6 text-gray-700 text-[15px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-2 gap-x-6 text-gray-700 text-[15px]">
               {[
                 ["Busan", "Vacation rentals"],
                 ["Jeju-do", "Vacation rentals"],
@@ -126,7 +126,7 @@ const DetailsFooter = () => (
             <div className="font-semibold mb-2 text-gray-900 text-[16px]">
               Other types of stays on Airbnb
             </div>
-            <div className="grid grid-cols-3 gap-x-2 text-gray-700 text-[15px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-2 gap-y-2 text-gray-700 text-[15px]">
               <div>
                 <a href="#" className="hover:underline font-medium text-black">
                   Seoul vacation rentals

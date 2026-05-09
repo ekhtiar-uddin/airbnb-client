@@ -39,7 +39,7 @@ function useModalHash({ flatPhotos }) {
     if (window.location.hash.startsWith("#modal-photo-")) {
       const idx = parseInt(
         window.location.hash.replace("#modal-photo-", ""),
-        10
+        10,
       );
       if (!isNaN(idx) && idx >= 0 && idx < flatPhotos.length) {
         setActivePhotoIndex(idx);
@@ -153,11 +153,11 @@ const PlaceGallery = ({ place }) => {
   // Details page gallery (unchanged)
   if (!modalOpen && !singleOpen) {
     return (
-      <div className="relative w-full z-10 ">
-        <div className="grid grid-cols-4 grid-rows-2 gap-2  overflow-hidden aspect-[2/1] bg-gray-100 min-h-[400px]">
+      <div className="relative w-full z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-4 sm:grid-rows-2 gap-2 overflow-hidden aspect-[4/3] sm:aspect-[2/1] bg-gray-100 min-h-[240px] sm:min-h-[400px]">
           {/* Large left */}
           <div
-            className="col-span-2 row-span-2 relative group cursor-pointer rounded-tl-[20px] rounded-bl-[20px] overflow-hidden"
+            className="relative group cursor-pointer overflow-hidden rounded-2xl sm:rounded-tl-[20px] sm:rounded-bl-[20px] sm:col-span-2 sm:row-span-2"
             onClick={handleGalleryImageClick}
           >
             <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-30 transition-opacity duration-300 z-10"></div>
@@ -172,7 +172,7 @@ const PlaceGallery = ({ place }) => {
           {/* 4 right images */}
           {galleryImages.slice(1, 5).map((img, idx) => (
             <div
-              className={`col-span-1 row-span-1 relative group cursor-pointer overflow-hidden ${
+              className={`hidden sm:block col-span-1 row-span-1 relative group cursor-pointer overflow-hidden ${
                 idx === 1 ? "rounded-tr-[20px]" : ""
               } ${idx === 3 ? "rounded-br-[20px]" : ""}`}
               key={idx}
@@ -191,7 +191,7 @@ const PlaceGallery = ({ place }) => {
         </div>
         <button
           onClick={handleGalleryOpen}
-          className="absolute bottom-4 right-4 z-10 flex items-center px-4 py-2 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition text-base font-medium"
+          className="absolute bottom-4 left-4 right-4 sm:left-auto sm:right-4 z-10 flex items-center justify-center sm:justify-start px-4 py-2 bg-white rounded-lg shadow-lg hover:bg-gray-100 transition text-base font-medium"
         >
           <Grip />
           Show all photos
@@ -208,7 +208,7 @@ const PlaceGallery = ({ place }) => {
         style={{ padding: "32px 0" }}
       >
         {/* Modal Header + Photo Tour Nav */}
-        <div className="w-full flex justify-between items-center px-10">
+        <div className="w-full flex justify-between items-center px-4 sm:px-10">
           <button
             className="text-3xl p-0 m-0 bg-none border-none cursor-pointer"
             style={{ color: "#222", background: "none" }}
@@ -223,15 +223,15 @@ const PlaceGallery = ({ place }) => {
           </div>
         </div>
         {/* Photo Tour Nav */}
-        <div className=" customDetailsWidth  mx-auto  mt-4">
+        <div className="customDetailsWidth mx-auto mt-4">
           <div className="text-2xl font-medium mb-3">Photo tour</div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 overflow-x-auto pr-4">
             {categories.map((cat) => (
               <AnchorLink
                 key={cat.key}
                 href={`#photo-cat-${cat.key}`}
                 offset="80"
-                className="flex flex-col items-center cursor-pointer group"
+                className="flex flex-col items-center cursor-pointer group flex-shrink-0"
                 style={{ minWidth: 130 }}
                 onClick={() => setScrollTargetKey(cat.key)}
               >
@@ -248,15 +248,15 @@ const PlaceGallery = ({ place }) => {
           </div>
         </div>
         {/* Photos by category - two column layout */}
-        <div className=" customDetailsWidth mx-auto px-10 pb-12 pt-6">
+        <div className="customDetailsWidth mx-auto px-4 sm:px-10 pb-12 pt-6">
           {categories.map((cat) => (
             <div
               key={cat.key}
               id={`photo-cat-${cat.key}`}
-              className="mb-16 flex"
+              className="mb-16 flex flex-col lg:flex-row gap-6"
             >
               {/* Left: Category label */}
-              <div style={{ width: 250 }}>
+              <div className="w-full lg:w-[250px]">
                 <div className="font-semibold text-xl text-black mb-2">
                   {cat.label}
                 </div>
@@ -294,14 +294,14 @@ const PlaceGallery = ({ place }) => {
                 )}
 
                 {/* Remaining images: grid 2 columns */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {cat.photos.slice(1).map((url, i) => {
                     // globalIdx needs to be offset by +1 since you sliced
                     const globalIdx = flatPhotos.findIndex(
                       (p) =>
                         p.url === url &&
                         p.catKey === cat.key &&
-                        p.indexInCat === i + 1
+                        p.indexInCat === i + 1,
                     );
                     return (
                       <div
@@ -357,11 +357,11 @@ const PlaceGallery = ({ place }) => {
           </span>
         </div>
         {/* Main Photo */}
-        <div className="flex-1 flex items-center justify-center w-full">
+        <div className="flex-1 flex items-center justify-center w-full px-4">
           <SafeImage
             src={curPhoto.url}
             alt=""
-            className="max-h-[70vh] max-w-[60vw] object-contain  shadow-2xl"
+            className="max-h-[70vh] max-w-[90vw] sm:max-w-[60vw] object-contain shadow-2xl"
             style={{
               background: "#fff",
             }}
@@ -369,13 +369,13 @@ const PlaceGallery = ({ place }) => {
         </div>
         {/* Navigation */}
         <button
-          className="cursor-pointer hover:bg-[#4a4a4a] text-white border-2  absolute top-1/2 left-12 -translate-y-1/2  bg-opacity-10 hover:bg-opacity-30 rounded-full p-3"
+          className="cursor-pointer hover:bg-[#4a4a4a] text-white border-2 absolute top-1/2 left-3 sm:left-12 -translate-y-1/2 bg-opacity-10 hover:bg-opacity-30 rounded-full p-3"
           onClick={handleSinglePrev}
         >
           <ChevronLeft />
         </button>
         <button
-          className="cursor-pointer hover:bg-[#4a4a4a] text-white border-2 absolute top-1/2 right-12 -translate-y-1/2  bg-opacity-10 hover:bg-opacity-30 rounded-full p-3"
+          className="cursor-pointer hover:bg-[#4a4a4a] text-white border-2 absolute top-1/2 right-3 sm:right-12 -translate-y-1/2 bg-opacity-10 hover:bg-opacity-30 rounded-full p-3"
           onClick={handleSingleNext}
         >
           <ChevronRight />

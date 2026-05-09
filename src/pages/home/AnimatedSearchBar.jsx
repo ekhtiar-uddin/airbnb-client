@@ -31,10 +31,18 @@ export default function AnimatedSearchBar({
     expandFromCompact;
 
   return (
-    <div className="  ">
+    <div className="w-full">
+      <div className="md:hidden w-full px-4 pb-2">
+        <div className="flex items-center gap-3 rounded-full border bg-white shadow-md h-12 px-4">
+          <Search className="w-4 h-4 text-gray-600" />
+          <span className="text-sm font-semibold text-gray-700">
+            Start your search
+          </span>
+        </div>
+      </div>
       <div
         className={`
-        w-full flex items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+        hidden md:flex w-full items-center justify-center transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
         ${isBigSearch ? "h-[190px] py-6" : "h-[64px] py-2"}
         bg-transparent
       `}

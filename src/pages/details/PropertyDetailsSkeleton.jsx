@@ -5,7 +5,7 @@ const PropertyDetailsSkeleton = () => {
       <div className="h-4 bg-gray-200 rounded animate-pulse mb-6" />
 
       {/* Main content: Left big box and right 4 boxes */}
-      <div className="grid grid-cols-2 gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
         {/* Left big box */}
         <div className="aspect-square bg-gray-200 rounded-xl animate-pulse" />
 
@@ -19,7 +19,7 @@ const PropertyDetailsSkeleton = () => {
       </div>
 
       {/* Bottom 4 short lines */}
-      <div className="grid grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
         <div className="h-4 bg-gray-200 rounded animate-pulse" />
         <div className="h-4 bg-gray-200 rounded animate-pulse" />
         <div className="h-4 bg-gray-200 rounded animate-pulse" />

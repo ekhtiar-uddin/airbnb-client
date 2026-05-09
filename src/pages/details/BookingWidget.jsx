@@ -10,6 +10,7 @@ export const BookingWidget = ({ place }) => {
   // States
   const [showCalendar, setShowCalendar] = useState(false);
   const [showGuestPicker, setShowGuestPicker] = useState(false);
+  const [monthsToShow, setMonthsToShow] = useState(2);
 
   // Use undefined for calendar compatibility
   const [dateRange, setDateRange] = React.useState({
@@ -40,7 +41,7 @@ export const BookingWidget = ({ place }) => {
       (unavailable) =>
         date.getFullYear() === unavailable.getFullYear() &&
         date.getMonth() === unavailable.getMonth() &&
-        date.getDate() === unavailable.getDate()
+        date.getDate() === unavailable.getDate(),
     );
   };
 
@@ -59,6 +60,15 @@ export const BookingWidget = ({ place }) => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const updateMonths = () => {
+      setMonthsToShow(window.innerWidth < 640 ? 1 : 2);
+    };
+    updateMonths();
+    window.addEventListener("resize", updateMonths);
+    return () => window.removeEventListener("resize", updateMonths);
   }, []);
 
   // Calculate nights
@@ -204,27 +214,31 @@ export const BookingWidget = ({ place }) => {
 
   return (
     <>
-      <div className="bg-white shadow-lg border border-gray-200 p-6 rounded-2xl sticky top-24 min-w-[330px]  transition-all">
+      <div className="bg-white shadow-lg border border-gray-200 p-4 sm:p-6 rounded-2xl lg:sticky lg:top-24 w-full min-w-0 sm:min-w-[330px] transition-all">
         {/* Price or Prompt Header */}
-        <div className="text-lg font-semibold mb-6 text-center">
+        <div className="mb-5 text-left">
           {numberOfNights > 0 ? (
-            <>
+            <div className="flex items-baseline gap-2 flex-wrap">
               <span className="text-2xl font-bold underline">
                 ${totalPrice}
-              </span>{" "}
-              for {numberOfNights} night{numberOfNights > 1 ? "s" : ""}
-            </>
+              </span>
+              <span className="text-base font-semibold">
+                for {numberOfNights} night{numberOfNights > 1 ? "s" : ""}
+              </span>
+            </div>
           ) : (
-            <>Add dates for prices</>
+            <span className="text-base sm:text-lg font-semibold leading-snug">
+              Add dates for prices
+            </span>
           )}
         </div>
 
         {/* Booking Form */}
         <div className="border border-gray-400 rounded-xl relative overflow-visible">
           {/* Date Inputs */}
-          <div className="grid grid-cols-2 border-b border-gray-400">
+          <div className="grid grid-cols-1 xs:grid-cols-2 border-b border-gray-400">
             <div
-              className="py-3 px-4 cursor-pointer hover:bg-gray-50 rounded-tl-xl focus:outline-none"
+              className="py-3 px-4 cursor-pointer hover:bg-gray-50 rounded-tl-xl focus:outline-none border-b xs:border-b-0 xs:border-r border-gray-200"
               onClick={handleCalendarOpen}
               tabIndex={0}
               aria-label="Choose check-in date"
@@ -237,7 +251,7 @@ export const BookingWidget = ({ place }) => {
               </div>
             </div>
             <div
-              className="py-3 px-4 cursor-pointer hover:bg-gray-50 rounded-tr-xl focus:outline-none"
+              className="py-3 px-4 cursor-pointer hover:bg-gray-50 xs:rounded-tr-xl focus:outline-none"
               onClick={handleCalendarOpen}
               tabIndex={0}
               aria-label="Choose check-out date"
@@ -287,7 +301,7 @@ export const BookingWidget = ({ place }) => {
           {showCalendar && (
             <div
               ref={calendarRef}
-              className="absolute -top-8 -right-10 mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl p-6 z-50   transition-all"
+              className="absolute left-0 right-0 top-full mt-2 sm:left-auto sm:right-0 sm:-top-8 sm:mt-2 bg-white border border-gray-200 rounded-2xl shadow-2xl p-6 z-50 transition-all"
               style={{ boxShadow: "0 6px 40px rgba(0,0,0,0.13)" }}
             >
               <div className="mb-2">
@@ -321,8 +335,8 @@ export const BookingWidget = ({ place }) => {
                 selected={dateRange}
                 onSelect={setDateRange}
                 disabled={getDisabledDates()}
-                numberOfMonths={2}
-                className="  [--cell-size:--spacing(11)] -p-6 md:[--cell-size:--spacing(9)]"
+                numberOfMonths={monthsToShow}
+                className="w-full [--cell-size:--spacing(11)] -p-6 md:[--cell-size:--spacing(9)]"
               />
               <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-200">
                 <button
@@ -598,7 +612,7 @@ export const BookingWidget = ({ place }) => {
 
         {/* Reserve / Check Availability Button */}
         <button
-          className="w-full mt-6 py-4 rounded-full font-semibold text-base transition-all
+          className="w-full mt-6 py-3.5 sm:py-4 rounded-full font-semibold text-sm sm:text-base transition-all
           text-white
           bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700
           shadow-lg"
