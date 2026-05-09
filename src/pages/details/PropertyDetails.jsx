@@ -42,13 +42,11 @@ const PropertyDetails = () => {
   if (isLoading || isFetching || !propertyData?.data) {
     return (
       <div className="h-[100vh] customDetailsWidth overflow-x-hidden">
-        <div className=" pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {/* Logo */}
+        <div className="pt-3 sm:pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
+          {/* Desktop navbar */}
+          <div className="hidden lg:flex items-center justify-between gap-4">
             <Link to={`/`}>
-              <div
-                className={`pb-5 h-[56px] w-[102px] flex items-center flex-shrink-0`}
-              >
+              <div className="pb-5 h-[56px] w-[102px] flex items-center flex-shrink-0">
                 <img src={logo} alt="logo" />
               </div>
             </Link>
@@ -60,10 +58,32 @@ const PropertyDetails = () => {
                 setStickyTab={setStickyTab}
               />
             </div>
-            {/* Right */}
             <div className="flex-shrink-0">
               <BecomeHost />
             </div>
+          </div>
+
+          {/* Mobile/tablet navbar */}
+          <div className="lg:hidden flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <Link to={`/`}>
+                <div className="pb-2 h-[48px] w-[96px] flex items-center flex-shrink-0">
+                  <img src={logo} alt="logo" />
+                </div>
+              </Link>
+              <div>
+                <BecomeHost />
+              </div>
+            </div>
+            <button
+              type="button"
+              className="searchShadow flex w-full items-center gap-2 rounded-full border border-[#dddddd] bg-white px-4 py-3 text-left"
+              aria-label="Start your search"
+            >
+              <span className="text-sm font-medium text-[#222222] truncate">
+                Start your search
+              </span>
+            </button>
           </div>
         </div>
         <PropertyDetailsSkeleton />
@@ -76,13 +96,11 @@ const PropertyDetails = () => {
   return (
     <div className="bg-gray-50 z-0 overflow-x-hidden">
       <div className="customDetailsWidth">
-        <div className=" pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            {/* Logo */}
+        <div className="pt-3 sm:pt-7 left-0 w-full z-40 bg-whited border-b transition-all duration-300">
+          {/* Desktop navbar */}
+          <div className="hidden lg:flex items-center justify-between gap-4">
             <Link to={`/`}>
-              <div
-                className={`pb-5 h-[56px] w-[102px] flex items-center flex-shrink-0`}
-              >
+              <div className="pb-5 h-[56px] w-[102px] flex items-center flex-shrink-0">
                 <img src={logo} alt="logo" />
               </div>
             </Link>
@@ -94,10 +112,32 @@ const PropertyDetails = () => {
                 setStickyTab={setStickyTab}
               />
             </div>
-            {/* Right */}
             <div className="flex-shrink-0">
               <BecomeHost />
             </div>
+          </div>
+
+          {/* Mobile/tablet navbar */}
+          <div className="lg:hidden flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+              <Link to={`/`}>
+                <div className="pb-2 h-[48px] w-[96px] flex items-center flex-shrink-0">
+                  <img src={logo} alt="logo" />
+                </div>
+              </Link>
+              <div>
+                <BecomeHost />
+              </div>
+            </div>
+            <button
+              type="button"
+              className="searchShadow flex w-full items-center gap-2 rounded-full border border-[#dddddd] bg-white px-4 py-3 text-left"
+              aria-label="Start your search"
+            >
+              <span className="text-sm font-medium text-[#222222] truncate">
+                Start your search
+              </span>
+            </button>
           </div>
         </div>
 

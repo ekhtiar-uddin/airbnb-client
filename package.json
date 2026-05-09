@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "commit": "git add . && git commit -m \" feat: polish UI and improve responsiveness \" && git push"
+    "commit": "git add . && git commit -m \" fix: fix details page navbar \" && git push"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.16",
